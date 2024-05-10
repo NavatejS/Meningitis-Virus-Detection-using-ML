@@ -26,3 +26,6 @@ Mean Square Error: The MSE is calculated as the mean or average of the squared d
 Root Mean Square Error: RMSE is the square root of the mean square error (MSE).
 
 We will evaluate the model based on accuracy, mean square error (MSE), root mean square error (RMSE), precision, recall, f1-score and confusion matrix.
+
+<img width="871" alt="Screenshot 2024-05-10 at 3 12 17 PM" src="https://github.com/NavatejS/Meningitis-Virus-Detection-using-ML/assets/164386165/bcb5843f-0a8f-4f4c-b641-24675a402326">
+
