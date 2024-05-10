@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-"""Meningitis Virus Detection.ipynb
-
-## **Understanding the Data**
-"""
 
 # Importing Libraries
 import numpy as np
@@ -17,7 +13,7 @@ from math import sqrt
 import warnings
 warnings.filterwarnings('ignore')
 
-"""#### Read Dataset"""
+#### Read Dataset
 
 # Reading the Data
 path1 = '/content/drive/My Drive/AB Project Mid/Meningtins Classification.xlsx'
@@ -37,7 +33,7 @@ df3['label'] = 2
 # Concatenate 3 dataframes
 df = pd.concat([df1, df2, df3], ignore_index=True)
 
-"""### Data Cleaning"""
+### Data Cleaning
 
 # Drop columns not needed
 df = df.drop(columns=['Unnamed: 0', 'Leukocytes in CSL', 'Lactates in CSL', 'GUL / GUK', 'Procalcitonin', 'CRP'])
@@ -55,7 +51,7 @@ df.isnull().sum()
 
 df = df.dropna()
 
-"""## **Exploratory Data Analysis**"""
+## **Exploratory Data Analysis**
 
 # Check balance data
 df['label'].value_counts()
@@ -69,7 +65,7 @@ fig = plt.figure(figsize = (16,10))
 ax = fig.gca()
 df.hist(ax = ax)
 
-"""#### Correlation Matrix"""
+#### Correlation Matrix
 
 df1 = df.copy().drop(['Color CSL', 'Look'], axis = 1)
 
@@ -104,7 +100,7 @@ plt.title('Correlation Matrix',
 
 plt.show()
 
-"""## **Data Preprocessing**"""
+## **Data Preprocessing**
 
 from sklearn import preprocessing
 
@@ -118,12 +114,12 @@ for col in object_col:
 y = df['label']
 X = df.drop('label', axis=1)
 
-"""### Data Splitting"""
+### Data Splitting
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=6)
 
-"""### Feature scaling"""
+### Feature scaling
 
 # Standardization
 from sklearn.preprocessing import StandardScaler
@@ -132,7 +128,7 @@ scale = StandardScaler()
 X_train = scale.fit_transform(X_train)
 X_test = scale.transform(X_test)
 
-"""## **Models**"""
+## **Models**
 
 random_forest_classifier = RandomForestClassifier(n_estimators = 300)
 random_forest_classifier.fit(X_train, y_train)
@@ -149,7 +145,7 @@ cm_svm = confusion_matrix(y_test, svm_pred)
 random_forest_classifier_pred = random_forest_classifier.predict(X_test)
 cm_forest = confusion_matrix(y_test, random_forest_classifier_pred)
 
-"""### Evaluation"""
+### Evaluation
 
 print("MSE of random forest model is: ", mean_squared_error(y_test, random_forest_classifier_pred))
 print("MSE of SVM model is: ", mean_squared_error(y_test, svm_pred))
@@ -157,7 +153,7 @@ print('\n')
 print("RMSE of random forest model is: ", sqrt(mean_squared_error(y_test, random_forest_classifier_pred)))
 print("RMSE of SVM model is: ", sqrt(mean_squared_error(y_test, svm_pred)))
 
-"""#### Confusion matrix"""
+#### Confusion matrix
 
 target_names = ['HEALTHY', 'BACTERIAL', 'VIRUS']
 
@@ -177,7 +173,7 @@ ax.set_title('Confusion Matrix SVM')
 ax.xaxis.set_ticklabels(target_names)
 ax.yaxis.set_ticklabels(target_names)
 
-"""#### Classification Report"""
+#### Classification Report
 
 print("Report Model - Random Forest\n")
 print(classification_report(random_forest_classifier_pred, y_test, target_names=target_names))
